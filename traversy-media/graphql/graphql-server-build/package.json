@@ -1,0 +1,17 @@
+{
+  "name": "graphql-server-build",
+  "version": "1.0.0",
+  "description": "Simple GraphQL server",
+  "main": "server.js",
+  "scripts": {
+    "dev:server": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4",
+    "express-graphql": "^0.6.7",
+    "graphql": "^0.10.5",
+    "nodemon": "^1.11.0"
+  }
+}
