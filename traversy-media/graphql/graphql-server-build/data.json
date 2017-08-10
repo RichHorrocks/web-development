@@ -1,0 +1,29 @@
+{
+  "customers": [
+    {
+      "id": "1",
+      "name": "John",
+      "age": 23
+    },
+    {
+      "id": "2",
+      "name": "Dave",
+      "age": 2
+    },
+    {
+      "id": "3",
+      "name": "Paul",
+      "age": 26
+    },
+    {
+      "id": "4",
+      "name": "Rob",
+      "age": 232
+    },
+    {
+      "id": "5",
+      "name": "Sarah",
+      "age": 19
+    }
+  ]
+}
