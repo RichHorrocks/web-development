@@ -130,55 +130,65 @@
     <!-- START HERE -->
     <form>
       <!-- SWITCH -->
-      <div>
-
+      <div class="switch">
+        <label>
+          disable
+          <input type="checkbox" checked>
+          <span class="lever"></span>
+          enable
+        </label>
       </div>
 
       <!-- DISABLED SWITCH -->
-      <div>
-
+      <div class="switch">
+        <label>
+          disable
+          <input type="checkbox">
+          <span class="lever"></span>
+          enable
+        </label>
       </div>
 
       <br>
       <br>
 
       <!-- FILE INPUT -->
-      <div>
-        <div>
+      <div class="file-field input-field">
+        <div class="btn">
           <span>Upload File</span>
           <input type="file">
         </div>
-        <div>
-          <input type="text">
+        <div class="file-path-wrapper">
+          <input type="text" class="file-path">
         </div>
       </div>
 
       <!-- RANGE SLIDER -->
-      <p>
-        <input type="range">
+      <p class="range-field">
+        <input type="range" min="0" max="100">
       </p>
 
       <!-- DATE PICKER -->
-      <div>
-        <input type="text" id="date">
+      <div class="input-field">
+        <input type="text" id="date" class="datepicker">
         <label for="date">Choose a Date</label>
       </div>
 
       <!-- TIME PICKER -->
-      <div>
-        <input type="text" id="time">
+      <div class="input-field">
+        <input type="text" id="time" class="timepicker">
         <label for="time">Choose a Time</label>
       </div>
 
       <!-- CHARACTER COUNTER -->
-      <div>
-        <input id="post" type="text">
+      <div class="input-field">
+        <input id="post" type="text" data-length="20">
         <label for="post">Post</label>
       </div>
 
       <!-- AUTOCOMPLETE -->
-      <div>
-        <input type="text" id="fruit">
+      <div class="input-field">
+        <input type="text" id="fruit" class="autocomplete">
         <label for="fruit">Type a Fruit</label>
       </div>
 
@@ -209,13 +219,30 @@
         constrainWidth: false,
         hover: true,
         belowOrigin: true,
-        alignment: 'left'
+        alignment: 'left',
       });
 
       // JAVASCRIPT START HERE //
+      // Init date picker.
+      $('.datepicker').pickadate({
+        selectMonths: true,
+        selectYears: 15,
+        closeOnSelect: true,
+      });
 
+      $('.timepicker').pickatime({
+        default: 'now',
+        twelvehour: false,
+      });
 
-
+      $('.autocomplete').autocomplete({
+        data: {
+          Apple: null,
+          Orange: null,
+        },
+        limit: 20,
+        minLength: 2,
+      });
 
     });
   </script>
