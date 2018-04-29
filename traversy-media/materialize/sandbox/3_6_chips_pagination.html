@@ -125,13 +125,13 @@
     <!-- START HERE -->
 
     <!-- CHIPS -->
-    <div>
+    <div class="chip">
       Web development
     </div>
-    <div>
+    <div class="chip">
       Web design
     </div>
-    <div>
+    <div class="chip">
       Programming
     </div>
 
@@ -139,61 +139,61 @@
     <br>
 
     <!-- CHIPS WITH CLOSE -->
-    <div>
+    <div class="chip">
       Web development
-      <i></i>
+      <i class="close material-icons">close</i>
     </div>
-    <div>
+    <div class="chip">
       Web design
-      <i></i>
+      <i class="close material-icons">close</i>
     </div>
-    <div>
+    <div class="chip">
       Programming
-      <i></i>
+      <i class="close material-icons">close</i>
     </div>
 
     <br>
     <br>
 
     <!-- CHIPS WITH IMAGES -->
-    <div>
-      <img src=""> John Doe
+    <div class="chip">
+      <img src="img/img1.jpg"> John Doe
     </div>
-    <div>
-      <img src=""> Brian Jackson
+    <div class="chip">
+      <img src="img/img2.jpg"> Brian Jackson
     </div>
-    <div>
-      <img src=""> Lori Smith
+    <div class="chip">
+      <img src="img/img3.jpg"> Lori Smith
     </div>
 
     <!-- CHIPS INPUT WITH AUTOCOMPLETE-->
-    <div></div>
+    <div class="chips-input"></div>
 
     <!-- PAGINATION -->
-    <ul>
-      <li>
+    <ul class="pagination">
+      <li class="disabled">
         <a href="#!">
-          <i></i>
+          <i class="material-icons">chevron_left</i>
         </a>
       </li>
-      <li>
+      <li class="waves-effect">
         <a href="#!">1</a>
       </li>
-      <li>
+      <li class="waves-effect active">
         <a href="#!">2</a>
       </li>
-      <li>
+      <li class="waves-effect">
         <a href="#!">3</a>
       </li>
-      <li>
+      <li class="waves-effect">
         <a href="#!">4</a>
       </li>
-      <li>
+      <li class="waves-effect">
         <a href="#!">5</a>
       </li>
-      <li>
+      <li class="waves-effect">
         <a href="#!">
-          <i></i>
+          <i class="material-icons">chevron_right</i>
         </a>
       </li>
     </ul>
@@ -216,13 +216,25 @@
         constrainWidth: false,
         hover: true,
         belowOrigin: true,
-        alignment: 'left'
+        alignment: 'left',
       });
 
       // JAVASCRIPT START HERE //
+      $('.chips-input').material_chip({
+        placeholder: 'Enter a tag',
+        secondaryPlaceholder: '+tag',
+        autocompleteOptions: {
+          data: {
+            html: null,
+            css: null,
+          },
+        },
+      });
 
-
-
+      // Add chip event.
+      $('.chips-input').on('chip.add', function (e, chip) {
+        console.log(`You added a chip - ${chip.tag}`);
+      });
 
     });
   </script>

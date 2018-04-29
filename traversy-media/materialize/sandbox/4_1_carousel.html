@@ -125,71 +125,71 @@
     <!-- START HERE -->
 
     <!-- CAROUSEL -->
-    <div>
-      <a href="">
-        <img src="">
+    <div class="carousel">
+      <a href="#one!" class="carousel-item">
+        <img src="img/img1.jpg">
       </a>
-      <a href="">
-        <img src="">
+      <a href="#two!" class="carousel-item">
+        <img src="img/img2.jpg">
       </a>
-      <a href="">
-        <img src="">
+      <a href="#three!" class="carousel-item">
+        <img src="img/img3.jpg">
       </a>
-      <a href="">
-        <img src="">
+      <a href="#four!" class="carousel-item">
+        <img src="img/img4.jpg">
       </a>
-      <a href="">
-        <img src="">
+      <a href="#five!" class="carousel-item">
+        <img src="img/img5.jpg">
       </a>
     </div>
 
     <!-- FULL WIDTH CAROUSEL -->
-    <div>
-      <a href="">
-        <img src="">
+    <div class="carousel carousel-slider" data-indicators="true">
+      <a href="#one!" class="carousel-item">
+        <img src="img/img1.jpg">
       </a>
-      <a href="">
-        <img src="">
+      <a href="#two!" class="carousel-item">
+        <img src="img/img2.jpg">
       </a>
-      <a href="">
-        <img src="">
+      <a href="#three!" class="carousel-item">
+        <img src="img/img3.jpg">
       </a>
-      <a href="">
-        <img src="">
+      <a href="#four!" class="carousel-item">
+        <img src="img/img4.jpg">
       </a>
-      <a href="">
-        <img src="">
+      <a href="#five!" class="carousel-item">
+        <img src="img/img5.jpg">
       </a>
     </div>
 
     <!-- CONTENT SLIDER -->
-    <div>
-      <div href="">
+    <div class="carousel carousel-slider center" data-indicators="true">
+      <div href="#one!" class="carousel-item red white-text">
         <h2>Panel One</h2>
         <p>This is panel one</p>
-        <div>
-          <a>button</a>
+        <div class="carousel-fixed-item center">
+          <a class="btn black">button</a>
         </div>
       </div>
-      <div href="">
+      <div href="#two!" class="carousel-item amber white-text">
         <h2>Panel Two</h2>
         <p>This is panel two</p>
-        <div>
-          <a>button</a>
+        <div class="carousel-fixed-item center">
+          <a class="btn black">button</a>
         </div>
       </div>
-      <div href="">
+      <div href="#three!" class="carousel-item green white-text">
         <h2>Panel Three</h2>
         <p>This is panel three</p>
-        <div>
-          <a>button</a>
+        <div class="carousel-fixed-item center">
+          <a class="btn black">button</a>
         </div>
       </div>
-      <div href="">
+      <div href="#four!" class="carousel-item blue white-text">
         <h2>Panel Four</h2>
         <p>This is panel four</p>
-        <div>
-          <a>button</a>
+        <div class="carousel-fixed-item center">
+          <a class="btn black">button</a>
         </div>
       </div>
     </div>
@@ -213,13 +213,12 @@
         constrainWidth: false,
         hover: true,
         belowOrigin: true,
-        alignment: 'left'
+        alignment: 'left',
       });
 
       // JAVASCRIPT START HERE //
-
-
-
+      //  $('.carousel').carousel();
+      $('.carousel-slider').carousel({ fullWidth: true });
 
     });
   </script>
