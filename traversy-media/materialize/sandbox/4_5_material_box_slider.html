@@ -127,40 +127,42 @@
     <div class="row">
       <div class="col s12 m6">
         <!-- MATERIAL BOX -->
-        <img src="">
+        <img src="img/img1.jpg" class="materialboxed" width="100%">
       </div>
       <div class="col s12 m6">
         <!-- WITH CAPTION -->
-        <img src="">
+        <img src="img/img2.jpg" class="materialboxed" width="100%" data-caption="This is my awesome photo.">
       </div>
     </div>
 
     <!-- SLIDER -->
-    <div>
-      <ul>
+    <div class="slider">
+      <ul class="slides">
         <li>
-          <img src="">
+          <img src="img/img3.jpg">
           <!-- CENTER ALIGN CAPTION -->
-          <div>
-            <h3>Center Caption</h3>
-            <h5>Lorem ipsum dolor sit amet.</h5>
+          <div class="caption center-align">
+            <h3 class="black-text">Center Caption</h3>
+            <h5 class="black-text">Lorem ipsum dolor sit amet.</h5>
           </div>
         </li>
         <li>
-          <img src="">
+          <img src="img/img4.jpg">
           <!-- LEFT ALIGN CAPTION -->
-          <div>
-            <h3>Left Aligned Caption</h3>
-            <h5>Here's our small slogan.</h5>
+          <div class="caption left-align">
+            <h3>Left Caption</h3>
+            <h5 class="light gray-text text-lighten-3">Lorem ipsum dolor sit amet.</h5>
           </div>
+
         </li>
         <li>
-          <img src="">
+          <img src="img/img5.jpg">
           <!-- RIGHT ALIGN CAPTION -->
-          <div>
-            <h3>Right Aligned Caption</h3>
-            <h5>Here's our small slogan.</h5>
+          <div class="caption right-align">
+            <h3 class="red-text">Right Caption</h3>
+            <h5 class="red-text">Lorem ipsum dolor sit amet.</h5>
           </div>
+
         </li>
       </ul>
     </div>
@@ -184,13 +186,16 @@
         constrainWidth: false,
         hover: true,
         belowOrigin: true,
-        alignment: 'left'
+        alignment: 'left',
       });
 
       // JAVASCRIPT START HERE //
-
-
-
+      $('.slider').slider({
+        indicators: true,
+        height: 400,
+        transition: 2000,
+        interval: 2000,
+      });
 
     });
   </script>

@@ -137,11 +137,10 @@
     <br>
 
     <!-- TOOLTIPS -->
-    <a class="btn">Bottom Tooltip</a>
-    <a class="btn">Top Tooltip</a>
-    <a class="btn">Right Tooltip</a>
-    <a class="btn">Left Tooltip</a>
-
+    <a class="btn tooltipped" data-delay="2000" data-position="bottom" data-tooltip="I am a tooltip">Bottom Tooltip</a>
+    <a class="btn tooltipped" data-position="top" data-tooltip="I am a tooltip">Top Tooltip</a>
+    <a class="btn tooltipped" data-position="right" data-tooltip="I am a tooltip">Right Tooltip</a>
+    <a class="btn tooltipped" data-position="left" data-tooltip="I am a tooltip">Left Tooltip</a>
 
     <!-- END HERE -->
 
@@ -165,7 +164,11 @@
       });
 
       // JAVASCRIPT START HERE //
-      $('#toast1').click(function () {
+      //$('#toast1').click(function () {
+      //  Materialize.toast('I am toast', 3000);
+      //});
+
+      document.getElementById('toast1').addEventListener('click', function () {
         Materialize.toast('I am toast', 3000);
       });
 
@@ -178,6 +181,12 @@
           alert('Toast Dismissed');
         });
       });
+
+      Materialize.toast('I am toast', 3000);
+
+      setTimeout(function () {
+        Materialize.Toast.removeAll();
+      }, 2000);
 
     });
   </script>
