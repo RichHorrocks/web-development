@@ -125,22 +125,22 @@
     <!-- START HERE -->
 
     <!-- PARALLAX -->
-    <div>
-      <div>
-        <img src="">
+    <div class="parallax-container">
+      <div class="parallax">
+        <img src="img/img1.jpg">
       </div>
     </div>
-    <div>
-      <div>
-        <h2>Parallax Example</h2>
+    <div class="section white">
+      <div class="row container">
+        <h2 class="header">Parallax Example</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores doloremque accusantium veniam modi ea non quisquam
           corporis. Doloremque error, dolore, perspiciatis reprehenderit soluta vitae, at quisquam dolorum sequi quidem veritatis
           amet earum nihil illo dignissimos dicta! Hic nesciunt animi distinctio!</p>
       </div>
     </div>
-    <div>
-      <div>
-        <img src="">
+    <div class="parallax-container">
+      <div class="parallax">
+        <img src="img/img2.jpg">
       </div>
     </div>
 
@@ -163,14 +163,11 @@
         constrainWidth: false,
         hover: true,
         belowOrigin: true,
-        alignment: 'left'
+        alignment: 'left',
       });
 
-
       // JAVASCRIPT START HERE //
-
-
-
+      $('.parallax').parallax();
 
     });
   </script>

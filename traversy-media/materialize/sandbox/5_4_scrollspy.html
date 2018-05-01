@@ -127,7 +127,7 @@
     <!-- SCROLLSPY -->
     <div class="row">
       <div class="col m9 l10 s12">
-        <div>
+        <div id="who" class="section scrollspy">
           <h4>Who Are We?</h4>
           <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis laborum tenetur tempora quo ipsum! Nisi nobis,
             dolorem excepturi quia rem architecto cupiditate repudiandae delectus nihil, commodi, accusamus corrupti obcaecati
@@ -135,7 +135,7 @@
           </p>
         </div>
 
-        <div>
+        <div id="what" class="section scrollspy">
           <h4>What Do We Do?</h4>
           <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis laborum tenetur tempora quo ipsum! Nisi nobis,
             dolorem excepturi quia rem architecto cupiditate repudiandae delectus nihil, commodi, accusamus corrupti obcaecati
@@ -143,7 +143,7 @@
           </p>
         </div>
 
-        <div>
+        <div id="where" class="section scrollspy">
           <h4>Where Are We?</h4>
           <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis laborum tenetur tempora quo ipsum! Nisi nobis,
             dolorem excepturi quia rem architecto cupiditate repudiandae delectus nihil, commodi, accusamus corrupti obcaecati
@@ -155,15 +155,15 @@
         </div>
       </div>
       <div class="col hide-on-small-only m3 l2 s12">
-        <ul>
+        <ul class="pinned section table-of-contents">
           <li>
-            <a>Who We Are</a>
+            <a href="#who">Who We Are</a>
           </li>
           <li>
-            <a>What We Do</a>
+            <a href="#what">What We Do</a>
           </li>
           <li>
-            <a>Where We Are</a>
+            <a href="#where">Where We Are</a>
           </li>
         </ul>
       </div>
@@ -176,8 +176,6 @@
   </div>
   <!-- ./ CONTAINER END -->
 
-
-
   <!--Import jQuery before materialize.js-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="js/materialize.min.js"></script>
@@ -188,10 +186,11 @@
         constrainWidth: false,
         hover: true,
         belowOrigin: true,
-        alignment: 'left'
+        alignment: 'left',
       });
 
-     
+      $('.scrollspy').scrollSpy();
+
     });
   </script>
 </body>

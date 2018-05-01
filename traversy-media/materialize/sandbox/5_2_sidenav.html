@@ -126,42 +126,42 @@
 
     <!-- SIDENAV -->
 
-    <ul>
+    <ul id="slide-out" class="side-nav">
       <li>
-        <div>
-          <div>
-            <img>
+        <div class="user-view">
+          <div class="background">
+            <img src="img/img4.jpg">
           </div>
-          <a>
-            <img>
+          <a href="#!">
+            <img class="circle" src="img/img5.jpg">
+          </a>
+          <a href="#!">
+            <span class="white-text name">John Doe</span>
           </a>
           <a>
-            <span>John Doe</span>
-          </a>
-          <a>
-            <span>jdoe@gmail.com</span>
+            <span class="white-text email">jdoe@gmail.com</span>
           </a>
         </div>
       </li>
       <li>
-        <a>
-          <i></i>Dashboard</a>
+        <a href="#!">
+          <i class="material-icons">dashboard</i>Dashboard</a>
       </li>
       <li>
-        <a>Posts</a>
+        <a href="#!">Posts</a>
       </li>
       <li>
-        <div></div>
+        <div class="divider"></div>
       </li>
       <li>
-        <a>Account Info</a>
+        <a class="subheader">Account Info</a>
       </li>
       <li>
-        <a>Logout</a>
+        <a class="waves-effect" href="#!">Logout</a>
       </li>
     </ul>
-    <a>
-      <i></i>
+    <a href="#!" data-activates="slide-out" class="button-collapse">
+      <i class="material-icons">menu</i>
     </a>
 
 
@@ -183,13 +183,15 @@
         constrainWidth: false,
         hover: true,
         belowOrigin: true,
-        alignment: 'left'
+        alignment: 'left',
       });
 
       // JAVASCRIPT START HERE //
-
-
-
+      $('.button-collapse').sideNav({
+        menuWidth: 400,
+        edge: 'right',
+        closeOnClick: false,
+      });
 
     });
   </script>

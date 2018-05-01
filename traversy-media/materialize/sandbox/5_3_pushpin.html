@@ -12,16 +12,28 @@
 
   <title>Materialize Sandbox</title>
   <style>
+    html, body, .block {
+      height: 100%;
+    }
+    .pin-top {
+      position: relative;
+    }
+    .pin-bottom {
+      position: relative;
+    }
+    .pinned {
+      position: fixed !important;
+    }
   </style>
 </head>
 
 <body>
-  <div>
-    <nav>
-      <div>
-        <div>
-          <a href="#">Blue</a>
-          <ul>
+  <div id="blue" class="block blue">
+    <nav class="pushpin-demo-nav" data-target="blue">
+      <div class="nav-wrapper light-blue">
+        <div class="<container></container>">
+          <a href="#" class="brand-logo">Blue</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li>
               <a href="#!">Blue Link 1</a>
             </li>
@@ -37,14 +49,14 @@
     </nav>
   </div>
 
-  <div>
-    <nav>
-      <div>
-        <div>
-          <a href="#">Red</a>
-          <ul>
+  <div id="red" class="block red lighten-1">
+    <nav class="pushpin-demo-nav" data-target="red">
+      <div class="nav-wrapper red">
+        <div class="<container></container>">
+          <a href="#" class="brand-logo">Red</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li>
-              <a href="#!">Red Link 1</a>
+              <a href="#!">Red` Link 1</a>
             </li>
             <li>
               <a href="#!">Red Link 2</a>
@@ -58,12 +70,12 @@
     </nav>
   </div>
 
-  <div>
-    <nav>
-      <div>
-        <div>
-          <a href="#">Green</a>
-          <ul>
+  <div id="green" class="block green lighten-1">
+    <nav class="pushpin-demo-nav" data-target="green">
+      <div class="nav-wrapper green">
+        <div class="<container></container>">
+          <a href="#" class="brand-logo">Green</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li>
               <a href="#!">Green Link 1</a>
             </li>
@@ -79,9 +91,6 @@
     </nav>
   </div>
 
-
-
-
   <!--Import jQuery before materialize.js-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="js/materialize.min.js"></script>
@@ -92,13 +101,24 @@
         constrainWidth: false,
         hover: true,
         belowOrigin: true,
-        alignment: 'left'
+        alignment: 'left',
       });
 
       // JAVASCRIPT START HERE
+      $('.target').pushpin({
+        top: 0,
+        bottom: 100,
+        offset: 0,
+      });
 
-
-
+      $('.pushpin-demo-nav').each(function () {
+        var $this = $(this);
+        var $target = $('#' + $(this).attr('data-target'));
+        $this.pushpin({
+          top: $target.offset().top,
+          bottom: $target.offset().top + $target.outerHeight() - $this.height(),
+        });
+      });
     });
   </script>
 </body>
