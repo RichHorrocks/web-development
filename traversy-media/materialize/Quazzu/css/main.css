@@ -1,3 +1,13 @@
+.primary-overlay {
+  background: rgba(112, 81, 176, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 .main-header {
   background: url(../img/background.jpg);
   background-size: cover;
@@ -13,4 +23,14 @@
 .active-link {
   color: #d847f1;
   font-weight: bold;
+}
+
+.section-developers {
+  position: relative;
+  background: url(../img/code.jpg);
+  background-size: cover;
+  background-position: center;
+  border-top: #333 5px;
+  border-bottom: #333 5px;
+  min-height: 180px;
 }
