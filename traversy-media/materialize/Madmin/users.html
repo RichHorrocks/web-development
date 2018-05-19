@@ -28,13 +28,13 @@
           <li>
             <a href="posts.html">Posts</a>
           </li>
-          <li class="active">
+          <li>
             <a href="categories.html">Categories</a>
           </li>
           <li>
             <a href="comments.html">Comments</a>
           </li>
-          <li>
+          <li class="active">
             <a href="users.html">Users</a>
           </li>
         </ul>
@@ -87,46 +87,64 @@
   </nav>
 
   <!-- Section: Categories. -->
-  <section class="section section-categories grey lighten-4">
+  <section class="section section-users grey lighten-4">
     <div class="container">
       <div class="row">
         <div class="col s12">
           <div class="card">
             <div class="card-content">
-              <span class="card-title">Categories</span>
+              <span class="card-title">Users</span>
               <table class="striped">
                 <thead>
                   <tr>
-                    <th>Title</th>
-                    <th>Date Created</th>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Registered</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Web Development</td>
-                    <td>Jan 1, 2018</td>
+                    <td width="70">
+                      <img src="img/person1.jpg" class="responsive-img cirle" alt="" style="width: 40px;margin-left:10px">
+                    </td>
+                    <td>John Doe</td>
+                    <td>jd@gmail.com</td>
+                    <td>1 Jan, 2018</td>
                     <td>
                       <a href="details.html" class="btn blue lighten-2">Details</a>
                     </td>
                   </tr>
                   <tr>
-                    <td>Graphic Design</td>
-                    <td>Jan 2, 2018</td>
+                    <td width="70">
+                      <img src="img/person2.jpg" class="responsive-img cirle" alt="" style="width: 40px;margin-left:10px">
+                    </td>
+                    <td>John Doe</td>
+                    <td>jd@gmail.com</td>
+                    <td>1 Jan, 2018</td>
                     <td>
                       <a href="details.html" class="btn blue lighten-2">Details</a>
                     </td>
                   </tr>
                   <tr>
-                    <td>Tech Gadgets</td>
-                    <td>Jan 3, 2018</td>
+                    <td width="70">
+                      <img src="img/person3.jpg" class="responsive-img cirle" alt="" style="width: 40px;margin-left:10px">
+                    </td>
+                    <td>John Doe</td>
+                    <td>jd@gmail.com</td>
+                    <td>1 Jan, 2018</td>
                     <td>
                       <a href="details.html" class="btn blue lighten-2">Details</a>
                     </td>
                   </tr>
                   <tr>
-                    <td>Other/td>
-                    <td>Jan 4, 2018</td>
+                    <td width="70">
+                      <img src="img/person4.jpg" class="responsive-img cirle" alt="" style="width: 40px;margin-left:10px">
+                    </td>
+                    <td>John Doe</td>
+                    <td>jd@gmail.com</td>
+                    <td>1 Jan, 2018</td>
                     <td>
                       <a href="details.html" class="btn blue lighten-2">Details</a>
                     </td>
@@ -176,19 +194,23 @@
 
   <!-- Fixed Action Button -->
   <div class="fixed-action-btn">
-    <a href="#category-modal" class="modal-trigger btn-floating btn-large red">
+    <a href="#users-modal" class="modal-trigger btn-floating btn-large red">
       <i class="material-icons">add</i>
     </a>
   </div>
 
-  <!-- Add Category Modal -->
-  <div id="category-modal" class="modal">
+  <!-- Add User Modal -->
+  <div id="users-modal" class="modal">
     <div class="modal-content">
-      <h4>Add Category</h4>
+      <h4>Add User</h4>
       <form>
         <div class="input-field">
-          <input type="text" id="title">
-          <label for="title">Title</label>
+          <input type="text" id="name">
+          <label for="name">Name</label>
+        </div>
+        <div class="input-field">
+          <input type="email" id="email">
+          <label for="email">Email</label>
         </div>
       </form>
       <div class="modal-footer">

@@ -28,7 +28,7 @@
           <li>
             <a href="posts.html">Posts</a>
           </li>
-          <li class="active">
+          <li>
             <a href="categories.html">Categories</a>
           </li>
           <li>
@@ -86,82 +86,47 @@
     </div>
   </nav>
 
-  <!-- Section: Categories. -->
-  <section class="section section-categories grey lighten-4">
+  <!-- Section: Details. -->
+  <section class="section section-posts grey lighten-4">
     <div class="container">
       <div class="row">
         <div class="col s12">
           <div class="card">
             <div class="card-content">
-              <span class="card-title">Categories</span>
-              <table class="striped">
-                <thead>
-                  <tr>
-                    <th>Title</th>
-                    <th>Date Created</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Web Development</td>
-                    <td>Jan 1, 2018</td>
-                    <td>
-                      <a href="details.html" class="btn blue lighten-2">Details</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Graphic Design</td>
-                    <td>Jan 2, 2018</td>
-                    <td>
-                      <a href="details.html" class="btn blue lighten-2">Details</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Tech Gadgets</td>
-                    <td>Jan 3, 2018</td>
-                    <td>
-                      <a href="details.html" class="btn blue lighten-2">Details</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Other/td>
-                    <td>Jan 4, 2018</td>
-                    <td>
-                      <a href="details.html" class="btn blue lighten-2">Details</a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="row">
+                <div class="col s12 m6">
+                  <span class="card-title">Post Details</span>
+                </div>
+                <div class="col s12 m6 center">
+                  <img src="img/person1.jpg" class="responsive-img cirle" alt="" style="width: 40px;margin-left:10px">
+                  <p>Posted by John Doe</p>
+                  <p>On Jan 12 2018</p>
+                </div>
+              </div>
+              <form>
+                <div class="input-field">
+                  <input type="text" id="title" value="Post 1">
+                  <label for="title">Title</label>
+                </div>
+                <div class="input-field">
+                  <select>
+                    <option value="" disabled>Select option</option>
+                    <option value="1" selected>Web Development</option>
+                    <option value="2">Graphic Design</option>
+                    <option value="3">Tech Gadgets</option>
+                    <option value="1">Other</option>
+                  </select>
+                  <label>Category</label>
+                </div>
+                <div class="input-field">
+                  <textarea name="body" id="body" class="materialize-textarea">This is the content for Post 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde ea dolorum molestiae nostrum quibusdam obcaecati, minima iusto quae error nam cum veritatis mollitia. Odit eum, modi! Est doloremque id pariatur, eligendi qui nesciunt itaque voluptate, quibusdam magni a repellat expedita sapiente ex, distinctio recusandae. Iste, molestias, vitae. Delectus, magni, iure.</textarea>
+                </div>
+              </form>
             </div>
             <div class="card-action">
-              <ul class="pagination">
-                <li class="disabled">
-                  <a href="#!" class="blue-text">
-                    <i class="material-icons">chevron_left</i>
-                  </a>
-                </li>
-                <li class="active blue lighten-2">
-                  <a href="#!" class="white-text">1</a>
-                </li>
-                <li class="waves-effect">
-                  <a href="#!" class="blue-text">2</a>
-                </li>
-                <li class="waves-effect">
-                  <a href="#!" class="blue-text">3</a>
-                </li>
-                <li class="waves-effect">
-                  <a href="#!" class="blue-text">4</a>
-                </li>
-                <li class="waves-effect">
-                  <a href="#!" class="blue-text">5</a>
-                </li>
-                <li>
-                  <a href="#!" class="waves-effect blue-text">
-                    <i class="material-icons">chevron_right</i>
-                  </a>
-                </li>
-              </ul>
+              <button class="btn green">Save</button>
+              <button class="btn red">Delete</button>
+
             </div>
           </div>
         </div>
@@ -173,29 +138,6 @@
   <footer class="section blue darken-2 white-text center">
     <p>Madmin Panel Copyright &copy; 2018</p>
   </footer>
-
-  <!-- Fixed Action Button -->
-  <div class="fixed-action-btn">
-    <a href="#category-modal" class="modal-trigger btn-floating btn-large red">
-      <i class="material-icons">add</i>
-    </a>
-  </div>
-
-  <!-- Add Category Modal -->
-  <div id="category-modal" class="modal">
-    <div class="modal-content">
-      <h4>Add Category</h4>
-      <form>
-        <div class="input-field">
-          <input type="text" id="title">
-          <label for="title">Title</label>
-        </div>
-      </form>
-      <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close btn blue white-text">Submit</a>
-      </div>
-    </div>
-  </div>
 
   <!-- Preloader -->
   <div class="loader preloader-wrapper big active">
@@ -213,6 +155,7 @@
   <!--Import jQuery before materialize.js-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
   <script>
 
     // Hide sections.
@@ -232,6 +175,10 @@
         // Init Modal
         $('.modal').modal();
 
+        // Init Select
+        $('select').material_select();
+
+        CKEDITOR.replace('body');
       });
     }, 1000);
   </script>
