@@ -28,3 +28,40 @@
   left: 47%;
   opacity: 0.5;
 }
+
+.box {
+  padding: 40px 10px !important;
+}
+
+.box h4 {
+  padding-bottom: 30px;
+}
+
+.section-boxes .row {
+  margin-bottom: 0 !important;
+}
+
+.section-contact {
+  position: relative;
+}
+
+.section-contact .card-panel {
+  position: relative;
+  z-index: 1;
+}
+
+#googlemap {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+@media(max-width: 600px) {
+  .main-header {
+    height: 50vh;
+  }
+
+}
