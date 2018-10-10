@@ -1,7 +1,17 @@
 window.addEventListener('load', init);
 
+// Available levels.
+const levels = {
+  easy: 5,
+  medium: 3,
+  hard: 2
+}
+
+// To change level.
+const currentLevel = levels.medium;
+
 // Globals.
-let time = 5;
+let time = currentLevel;
 let score = 0;
 let isPlaying;
 
@@ -43,14 +53,49 @@ const words = [
 
 // Initialise game.
 function init() {
+  // Show number of seconds for this level.
+  seconds.innerHTML = currentLevel;
+  
   // Load a word from the array.
   showWord(words);
+
+  // Start matching on word input.
+  wordInput.addEventListener('input', startMatch);
 
   // Call countdown every second.
   setInterval(countdown, 1000);
 
   // Check game status.
   setInterval(checkStatus, 50);
+}
+
+// Start matching the input.
+function startMatch() {
+  if (matchWords()) {
+    isPlaying = true;
+    time = currentLevel + 1;
+    showWord(words);
+    wordInput.value = '';
+    score++;
+  }
+
+  // If the score is -1, display 0;
+  if (score === -1) {
+    scoreDisplay.innerHTML = 0;
+  } else {
+    scoreDisplay.innerHTML = score;
+  }
+}
+
+// Match the current word to the word input.
+function matchWords() {
+  if (wordInput.value === currentWord.innerHTML) {
+    message.innerHTML = 'Correct!';
+    return true;
+  } else {
+    message.innerHTML = '';
+    return false;
+  }
 }
 
 // Pick and show a random word.
@@ -81,5 +126,6 @@ function countdown() {
 function checkStatus() {
   if (!isPlaying && time === 0) {
     message.innerHTML = 'Game Over!';
+    score = -1;
   }
 }
