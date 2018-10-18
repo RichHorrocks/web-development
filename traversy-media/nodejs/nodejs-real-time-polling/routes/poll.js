@@ -15,6 +15,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+  console.log("Got POST");
   pusher.trigger('os-poll', 'os-vote', {
     points: 1,
     os: req.body.os
