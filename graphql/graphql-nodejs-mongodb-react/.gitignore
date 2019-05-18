@@ -2,3 +2,4 @@
 .eslintrc.json
 .tern-project
 package-lock.json
+nodemon.json
