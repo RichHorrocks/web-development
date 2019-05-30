@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import './MainNavigation.css';
 
-const mainNavigation = props => {
+const mainNavigation = () => {
   return (
     <header className="main-navigation">
       <div className="main-navigation__logo">
