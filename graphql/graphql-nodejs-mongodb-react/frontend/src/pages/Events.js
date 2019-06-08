@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Modal from '../components/Modal/Modal';
+import Spinner from '../components/Spinner/Spinner';
 import Backdrop from '../components/Backdrop/Backdrop.js';
 import AuthContext from '../context/auth-context';
 import EventList from '../components/Events/EventList/EventList';
@@ -9,7 +10,9 @@ import './events.css';
 class EventsPage extends Component {
   state = {
     creating: false,
-    events: []
+    events: [],
+    isLoading: false,
+    selectedEvent: null
   };
 
   static contextType = AuthContext;
@@ -31,7 +34,7 @@ class EventsPage extends Component {
   };
 
   cancelHandler = () => {
-    this.setState({ creating: false });
+    this.setState({ creating: false, selectedEvent: null });
   };
 
   confirmHandler = () => {
@@ -109,6 +112,8 @@ class EventsPage extends Component {
   };
 
   fetchEvents() {
+    this.setState({ isLoading: true });
+
     const requestBody = {
       query: `
         query {
@@ -144,22 +149,34 @@ class EventsPage extends Component {
       })
       .then(resData => {
         const events = resData.data.events;
-        this.setState({ events });
+        this.setState({ events, isLoading: false });
       })
       .catch(err => {
         console.log(err);
+        this.setState({ isLoading: false });
       });
   }
+
+  showDetailHandler = eventId => {
+    console.log(eventId);
+    this.setState(prevState => {
+      const selectedEvent = prevState.events.find(e => e._id === eventId);
+      return { selectedEvent: selectedEvent };
+    });
+  };
+
+  bookEventHandler = () => {};
 
   render() {
     return (
       <React.Fragment>
-        {this.state.creating && <Backdrop />}
+        {(this.state.creating || this.state.selectedEvent) && <Backdrop />}
         {this.state.creating && (
           <Modal
             title="Add Event"
             canCancel
             canConfirm
+            confirmText="Confirm"
             onCancel={this.cancelHandler}
             onConfirm={this.confirmHandler}
           >
@@ -188,6 +205,23 @@ class EventsPage extends Component {
             </form>
           </Modal>
         )}
+        {this.state.selectedEvent && (
+          <Modal
+            title={this.state.selectedEvent.title}
+            canCancel
+            canConfirm
+            confirmText="Book"
+            onCancel={this.cancelHandler}
+            onConfirm={this.bookEventHandler}
+          >
+            <h1>{this.state.selectedEvent.title}</h1>
+            <h2>
+              £{this.state.selectedEvent.price} -{' '}
+              {new Date(this.state.selectedEvent.date).toLocaleDateString()}
+            </h2>
+            <p>{this.state.selectedEvent.description}</p>
+          </Modal>
+        )}
         {this.context.token && (
           <div className="events-control">
             <p>Share your own events!</p>
@@ -196,10 +230,15 @@ class EventsPage extends Component {
             </button>
           </div>
         )}
-        <EventList
-          events={this.state.events}
-          authUserId={this.context.userId}
-        />
+        {this.state.isLoading ? (
+          <Spinner />
+        ) : (
+          <EventList
+            events={this.state.events}
+            authUserId={this.context.userId}
+            onViewDetail={this.showDetailHandler}
+          />
+        )}
       </React.Fragment>
     );
   }
