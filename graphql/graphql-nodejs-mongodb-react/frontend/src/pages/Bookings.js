@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Spinner from '../components/Spinner/Spinner';
 import AuthContext from '../context/auth-context';
+import BookingList from '../components/Bookings/BookingList/BookingList';
 
 class BookingsPage extends Component {
   state = {
@@ -62,22 +63,62 @@ class BookingsPage extends Component {
       });
   };
 
+  onDeleteHandler = bookingId => {
+    this.setState({ isLoading: true });
+
+    const requestBody = {
+      query: `
+        mutation {
+          cancelBooking(bookingId: "${bookingId}") {
+            _id
+            title
+          }
+        }
+      `
+    };
+
+    const token = this.context.token;
+
+    // Send a request to the back-end. Could use axios() instead of fetch().
+    // fetch() can also be used to send as well as fetch data.
+    fetch('http://localhost:8000/graphql', {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token
+      }
+    })
+      .then(res => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error('Failed!');
+        }
+        return res.json();
+      })
+      .then(() => {
+        this.setState(prevState => {
+          const updatedBookings = prevState.bookings.filter(booking => {
+            return booking._id !== bookingId;
+          });
+          return { bookings: updatedBookings, loading: false };
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({ isLoading: false });
+      });
+  };
+
   render() {
     return (
       <React.Fragment>
         {this.state.isLoading ? (
           <Spinner />
         ) : (
-          <div>
-            <ul>
-              {this.state.bookings.map(booking => (
-                <li key={booking._id}>
-                  {booking.event.title} -{' '}
-                  {new Date(booking.createdAt).toLocaleString()}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <BookingList
+            bookings={this.state.bookings}
+            onDelete={this.onDeleteHandler}
+          />
         )}
       </React.Fragment>
     );
