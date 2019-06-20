@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Modal from '../components/Modal/Modal';
-import Spinner from '../components/Spinner/Spinner';
-import Backdrop from '../components/Backdrop/Backdrop.js';
-import AuthContext from '../context/auth-context';
-import EventList from '../components/Events/EventList/EventList';
 
-import './events.css';
+import Modal from '../components/Modal/Modal';
+import Backdrop from '../components/Backdrop/Backdrop';
+import EventList from '../components/Events/EventList/EventList';
+import Spinner from '../components/Spinner/Spinner';
+import AuthContext from '../context/auth-context';
+import './Events.css';
 
 class EventsPage extends Component {
   state = {
@@ -14,38 +14,32 @@ class EventsPage extends Component {
     isLoading: false,
     selectedEvent: null
   };
-
   isActive = true;
+
   static contextType = AuthContext;
 
   constructor(props) {
     super(props);
-    this.titleRef = React.createRef();
-    this.priceRef = React.createRef();
-    this.dateRef = React.createRef();
-    this.descriptionRef = React.createRef();
+    this.titleElRef = React.createRef();
+    this.priceElRef = React.createRef();
+    this.dateElRef = React.createRef();
+    this.descriptionElRef = React.createRef();
   }
 
   componentDidMount() {
     this.fetchEvents();
   }
 
-  createEventHandler = () => {
+  startCreateEventHandler = () => {
     this.setState({ creating: true });
   };
 
-  cancelHandler = () => {
-    this.setState({ creating: false, selectedEvent: null });
-  };
-
-  confirmHandler = () => {
+  modalConfirmHandler = () => {
     this.setState({ creating: false });
-
-    const title = this.titleRef.current.value;
-    // Use a '+' to convert the price string to a number.
-    const price = +this.priceRef.current.value;
-    const date = this.dateRef.current.value;
-    const description = this.descriptionRef.current.value;
+    const title = this.titleElRef.current.value;
+    const price = +this.priceElRef.current.value;
+    const date = this.dateElRef.current.value;
+    const description = this.descriptionElRef.current.value;
 
     if (
       title.trim().length === 0 ||
@@ -61,22 +55,26 @@ class EventsPage extends Component {
 
     const requestBody = {
       query: `
-        mutation {
-          createEvent(eventInput: {title: "${title}", description: "${description}", price: ${price}, date: "${date}"}) {
-            _id
-            title
-            description
-            date
-            price
+          mutation CreateEvent($title: String!, $desc: String!, $price: Float!, $date: String!) {
+            createEvent(eventInput: {title: $title, description: $desc, price: $price, date: $date}) {
+              _id
+              title
+              description
+              date
+              price
+            }
           }
-        }
-      `
+        `,
+      variables: {
+        title: title,
+        desc: description,
+        price: price,
+        date: date
+      }
     };
 
     const token = this.context.token;
 
-    // Send a request to the back-end. Could use axios() instead of fetch().
-    // fetch() can also be used to send as well as fetch data.
     fetch('http://localhost:8000/graphql', {
       method: 'POST',
       body: JSON.stringify(requestBody),
@@ -112,29 +110,30 @@ class EventsPage extends Component {
       });
   };
 
+  modalCancelHandler = () => {
+    this.setState({ creating: false, selectedEvent: null });
+  };
+
   fetchEvents() {
     this.setState({ isLoading: true });
-
     const requestBody = {
       query: `
-        query {
-          events {
-            _id
-            title
-            description
-            date
-            price
-            creator {
+          query {
+            events {
               _id
-              email
+              title
+              description
+              date
+              price
+              creator {
+                _id
+                email
+              }
             }
           }
-        }
-      `
+        `
     };
 
-    // Send a request to the back-end. Could use axios() instead of fetch().
-    // fetch() can also be used to send as well as fetch data.
     fetch('http://localhost:8000/graphql', {
       method: 'POST',
       body: JSON.stringify(requestBody),
@@ -151,7 +150,7 @@ class EventsPage extends Component {
       .then(resData => {
         const events = resData.data.events;
         if (this.isActive) {
-          this.setState({ events, isLoading: false });
+          this.setState({ events: events, isLoading: false });
         }
       })
       .catch(err => {
@@ -163,7 +162,6 @@ class EventsPage extends Component {
   }
 
   showDetailHandler = eventId => {
-    console.log(eventId);
     this.setState(prevState => {
       const selectedEvent = prevState.events.find(e => e._id === eventId);
       return { selectedEvent: selectedEvent };
@@ -171,25 +169,25 @@ class EventsPage extends Component {
   };
 
   bookEventHandler = () => {
-    console.log(this.state.selectedEvent._id);
     if (!this.context.token) {
       this.setState({ selectedEvent: null });
       return;
     }
     const requestBody = {
       query: `
-        mutation {
-          bookEvent(eventId: "${this.state.selectedEvent._id}") {
-            _id
-            createdAt
-            updatedAt
+          mutation BookEvent($id: ID!) {
+            bookEvent(eventId: $id) {
+              _id
+             createdAt
+             updatedAt
+            }
           }
-        }
-      `
+        `,
+      variables: {
+        id: this.state.selectedEvent._id
+      }
     };
 
-    // Send a request to the back-end. Could use axios() instead of fetch().
-    // fetch() can also be used to send as well as fetch data.
     fetch('http://localhost:8000/graphql', {
       method: 'POST',
       body: JSON.stringify(requestBody),
@@ -226,30 +224,29 @@ class EventsPage extends Component {
             title="Add Event"
             canCancel
             canConfirm
+            onCancel={this.modalCancelHandler}
+            onConfirm={this.modalConfirmHandler}
             confirmText="Confirm"
-            onCancel={this.cancelHandler}
-            onConfirm={this.confirmHandler}
           >
-            <form action="">
+            <form>
               <div className="form-control">
                 <label htmlFor="title">Title</label>
-                <input type="text" id="title" ref={this.titleRef} />
+                <input type="text" id="title" ref={this.titleElRef} />
               </div>
               <div className="form-control">
-                <label htmlFor="prive">Price</label>
-                <input type="number" id="prive" ref={this.priceRef} />
+                <label htmlFor="price">Price</label>
+                <input type="number" id="price" ref={this.priceElRef} />
               </div>
               <div className="form-control">
                 <label htmlFor="date">Date</label>
-                <input type="datetime-local" id="date" ref={this.dateRef} />
+                <input type="datetime-local" id="date" ref={this.dateElRef} />
               </div>
               <div className="form-control">
                 <label htmlFor="description">Description</label>
                 <textarea
-                  type="text"
                   id="description"
                   rows="4"
-                  ref={this.descriptionRef}
+                  ref={this.descriptionElRef}
                 />
               </div>
             </form>
@@ -260,13 +257,13 @@ class EventsPage extends Component {
             title={this.state.selectedEvent.title}
             canCancel
             canConfirm
-            confirmText={this.context.token ? 'Book' : 'Confirm'}
-            onCancel={this.cancelHandler}
+            onCancel={this.modalCancelHandler}
             onConfirm={this.bookEventHandler}
+            confirmText={this.context.token ? 'Book' : 'Confirm'}
           >
             <h1>{this.state.selectedEvent.title}</h1>
             <h2>
-              £{this.state.selectedEvent.price} -{' '}
+              ${this.state.selectedEvent.price} -{' '}
               {new Date(this.state.selectedEvent.date).toLocaleDateString()}
             </h2>
             <p>{this.state.selectedEvent.description}</p>
@@ -274,8 +271,8 @@ class EventsPage extends Component {
         )}
         {this.context.token && (
           <div className="events-control">
-            <p>Share your own events!</p>
-            <button className="btn" onClick={this.createEventHandler}>
+            <p>Share your own Events!</p>
+            <button className="btn" onClick={this.startCreateEventHandler}>
               Create Event
             </button>
           </div>

@@ -68,13 +68,16 @@ class BookingsPage extends Component {
 
     const requestBody = {
       query: `
-        mutation {
-          cancelBooking(bookingId: "${bookingId}") {
+        mutation CancelBooking($id: ID!) {
+          cancelBooking(bookingId: $id) {
             _id
             title
           }
         }
-      `
+      `,
+      variables: {
+        id: bookingId
+      }
     };
 
     const token = this.context.token;
@@ -100,7 +103,7 @@ class BookingsPage extends Component {
           const updatedBookings = prevState.bookings.filter(booking => {
             return booking._id !== bookingId;
           });
-          return { bookings: updatedBookings, loading: false };
+          return { bookings: updatedBookings, isLoading: false };
         });
       })
       .catch(err => {
