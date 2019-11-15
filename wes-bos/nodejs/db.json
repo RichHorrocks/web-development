@@ -1,0 +1,18 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "lowdb is cool"
+    },
+    {
+      "id": 1,
+      "title": "lowdb is cool"
+    },
+    {
+      "id": 1,
+      "title": "lowdb is cool"
+    }
+  ],
+  "user": {},
+  "count": 0
+}
