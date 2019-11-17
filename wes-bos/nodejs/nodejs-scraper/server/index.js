@@ -1,10 +1,12 @@
 import express from 'express';
+import cors from 'cors';
 import db from './lib/db';
 import { getInstagramCount, getTwitterCount } from './lib/scraper';
 import './lib/cron';
 
 // Set up the routing.
 const app = express();
+app.use(cors());
 
 app.get('/scrape', async (req, res, next) => {
   console.log('Scraping');
@@ -18,6 +20,14 @@ app.get('/scrape', async (req, res, next) => {
   );
 
   res.json({ iCount, tCount });
+});
+
+app.get('/data', async (req, res, next) => {
+  // Get the scraped data.
+  const data = db.value();
+
+  // Respond with JSON.
+  res.json(data);
 });
 
 app.listen(2093, () => console.log('Running on port 2093'));
