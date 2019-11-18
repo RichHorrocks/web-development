@@ -3,7 +3,7 @@ import cheerio from 'cheerio';
 import db from './db';
 
 async function getHTML(url) {
-  const { data: html } = await axios.get('https://twitter.com/RichJHorrocks');
+  const { data: html } = await axios.get('https://twitter.com/wesbos');
   return html;
 }
 
@@ -16,9 +16,7 @@ async function getTwitterFollowers(html) {
 }
 
 export async function getInstagramCount() {
-  const { data } = await axios.get(
-    `https://www.instagram.com/richhorrocks/?__a=1`
-  );
+  const { data } = await axios.get(`https://www.instagram.com/wesbos/?__a=1`);
 
   return data.graphql.user.edge_followed_by.count;
 }

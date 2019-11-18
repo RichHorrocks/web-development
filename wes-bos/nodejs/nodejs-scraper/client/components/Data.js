@@ -1,24 +1,23 @@
 import React, { useContext } from 'react';
 import { ScrapeContext } from './ScrapeContext';
-import { formatDistance } from 'date-fns';
+
+import Table from './Table';
+import Chart from './Chart';
 
 const Data = () => {
-  const dataContext = useContext(ScrapeContext);
-  const { scrapes } = dataContext;
+  const { scrapes, getData } = useContext(ScrapeContext);
 
   return (
     <div>
-      <h2>Your data:</h2>
-      <ul>
-        {scrapes.twitter.map(scrape => (
-          <li key={scrape.date}>
-            {scrape.count} -{' '}
-            {formatDistance(new Date(scrape.date), new Date(), {
-              addSuffix: true
-            })}
-          </li>
-        ))}
-      </ul>
+      <button type="button" onClick={getData}>
+        Refresh Data
+      </button>
+      <h2>Twitter</h2>
+      <Chart scrapes={scrapes.twitter} />
+      <Table scrapes={scrapes.twitter} />
+      <h2>Instagram</h2>
+      <Chart scrapes={scrapes.instagram} />
+      <Table scrapes={scrapes.instagram} />
     </div>
   );
 };

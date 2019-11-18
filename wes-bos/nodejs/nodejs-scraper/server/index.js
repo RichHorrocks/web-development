@@ -3,6 +3,7 @@ import cors from 'cors';
 import db from './lib/db';
 import { getInstagramCount, getTwitterCount } from './lib/scraper';
 import './lib/cron';
+import uniqueCount from './lib/utils';
 
 // Set up the routing.
 const app = express();
@@ -24,10 +25,14 @@ app.get('/scrape', async (req, res, next) => {
 
 app.get('/data', async (req, res, next) => {
   // Get the scraped data.
-  const data = db.value();
+  const { twitter, instagram } = db.value();
+
+  // Filter for only unique values.
+  const uniqueTwitter = uniqueCount(twitter);
+  const uniqueInstagram = uniqueCount(instagram);
 
   // Respond with JSON.
-  res.json(data);
+  res.json({ twitter: uniqueTwitter, instagram: uniqueInstagram });
 });
 
 app.listen(2093, () => console.log('Running on port 2093'));
