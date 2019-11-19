@@ -4,6 +4,7 @@ import db from './lib/db';
 import { getInstagramCount, getTwitterCount } from './lib/scraper';
 import './lib/cron';
 import uniqueCount from './lib/utils';
+import aggregate from './lib/aggregate';
 
 // Set up the routing.
 const app = express();
@@ -33,6 +34,21 @@ app.get('/data', async (req, res, next) => {
 
   // Respond with JSON.
   res.json({ twitter: uniqueTwitter, instagram: uniqueInstagram });
+});
+
+app.get('/aggregate', async (req, res, next) => {
+  // Get the scraped data.
+  const { twitter, instagram } = db.value();
+
+  // Filter for only unique values.
+  const uniqueTwitter = uniqueCount(twitter);
+  const uniqueInstagram = uniqueCount(instagram);
+
+  // Aggregate these values.
+  const aggTwitter = aggregate(twitter);
+
+  // Respond with JSON.
+  res.json({ twitter: aggTwitter });
 });
 
 app.listen(2093, () => console.log('Running on port 2093'));
