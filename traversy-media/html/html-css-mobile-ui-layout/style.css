@@ -1,0 +1,67 @@
+:root {
+  --primary-color: #cc0000;
+  --secondary-color: #7c0000;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 10px;
+  overflow: none;
+}
+
+.app-header {
+  background-color: var(--primary-color);
+  box-shadow: 3px 3px 10px #888;
+}
+
+.app-header .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 10px;
+}
+.app-header .logo {
+  width: 170px;
+  margin-bottom: 16px;
+}
+
+.app-header input[type='text'] {
+  padding: 7px;
+  width: 300px;
+  border: 0;
+  border-radius: 3px;
+}
+
+.subheader {
+  background: var(--secondary-color);
+  color: #fff;
+  box-shadow: 3px 3px 10px #888;
+  margin: 0 auto 16px auto;
+  width: 90%;
+  font-size: 14px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.subheader p {
+  margin: 4px;
+}
+
+.subheader img {
+  width: 40px;
+}
