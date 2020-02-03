@@ -20,7 +20,7 @@ function showTime() {
   // Output time.
   time.innerHTML = `${hour}<span>:</span>${addZero(min)}<span>:</span>${addZero(
     sec
-  )}`;
+  )} ${amPm}`;
 
   setTimeout(showTime, 1000);
 }
