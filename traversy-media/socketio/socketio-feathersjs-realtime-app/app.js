@@ -40,7 +40,7 @@ app.configure(express.rest());
 app.use('/ideas', new IdeaService());
 
 // New connections connect to stream channel.
-app.on('connectoin', conn => app.channel('stream').join(conn));
+app.on('connection', conn => app.channel('stream').join(conn));
 // Publish events to stream.
 app.publish(data => app.channel('stream'));
 
@@ -51,3 +51,10 @@ app
   .on('listening', () =>
     console.log(`Realtime server running on port ${PORT}`)
   );
+
+// app.service('ideas').create({
+//   text: 'Build a cool app',
+//   tech: 'Node.js',
+//   viewer: 'John Doe',
+//   time: moment().format('h:mm:ss a')
+// });
