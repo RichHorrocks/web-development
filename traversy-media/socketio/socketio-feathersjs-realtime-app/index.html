@@ -84,6 +84,37 @@
     <script src="https://unpkg.com/@feathersjs/client@^4.3.0/dist/feathers.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
 
-    <script></script>
+    <script>
+      // Socket.io setup.
+      const socket = io('http://localhost:3030');
+
+      // Init Feathers app.
+      const app = feathers();
+
+      // Register socket.io to talk to server.
+      app.configure(feathers.socketio(socket));
+
+      document.getElementById('form').addEventListener('submit', sendIdea);
+
+      async function sendIdea(e) {
+        e.preventDefault();
+
+        const text = document.getElementById('idea-text');
+        const tech = document.getElementById('idea-tech');
+        const viewer = document.getElementById('idea-viewer');
+
+        // Create a new idea.
+        app.service('ideas').create({
+          text: text.value,
+          tech: tech.value,
+          viewer: viewer.value
+        });
+
+        // Clear the inputs.
+        text.value = '';
+        tech.value = '';
+        viewer.value = '';
+      }
+    </script>
   </body>
 </html>
