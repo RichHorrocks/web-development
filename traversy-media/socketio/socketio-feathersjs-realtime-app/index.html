@@ -64,19 +64,7 @@
           </form>
         </div>
         <div class="col-md-6">
-          <div id="ideas">
-            <!-- <div class="card bg-secondary my-3">
-              <div class="card-body">
-                <p class="lead">
-                  Create a realtime app <strong>(Feathers.js)</strong>
-                  <br />
-                  <em>Submitted by John Doe</em>
-                  <br />
-                  <small>2:05:10</small>
-                </p>
-              </div>
-            </div> -->
-          </div>
+          <div id="ideas"></div>
         </div>
       </div>
     </div>
@@ -115,6 +103,35 @@
         tech.value = '';
         viewer.value = '';
       }
+
+      function renderIdea(idea) {
+        document.getElementById(
+          'ideas'
+        ).innerHTML += `<div class="card bg-secondary my-3">
+          <div class="card-body">
+            <p class="lead">
+              ${idea.text} <strong>(${idea.tech})</strong>
+              <br />
+              <em>Submitted by ${idea.viewer}</em>
+              <br />
+              <small>${idea.time}</small>
+            </p>
+          </div>
+        </div>`;
+      }
+
+      async function init() {
+        // Find ideas.
+        const ideas = await app.service('ideas').find();
+
+        // Add existing ideas to our list.
+        ideas.forEach(renderIdea);
+
+        // Add idea in real time.
+        app.service('ideas').on('created', renderIdea);
+      }
+
+      init();
     </script>
   </body>
 </html>
