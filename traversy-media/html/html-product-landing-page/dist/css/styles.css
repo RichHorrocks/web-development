@@ -73,3 +73,24 @@ img {
 .navbar .nav a:hover {
   color: #555;
 }
+
+.section-a {
+  margin: 2rem 0;
+}
+
+.section-a .container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 3rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-a h1 {
+  color: var(--primary-color);
+  font-size: 4rem;
+}
+
+.section-a p {
+  margin: 1rem 0;
+}
