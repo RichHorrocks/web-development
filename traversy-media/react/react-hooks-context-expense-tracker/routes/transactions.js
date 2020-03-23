@@ -9,7 +9,8 @@ const {
 router
   .route('/')
   .get(getTransactions)
-  .post(addTransactions)
-  .delete(deleteTransactions);
+  .post(addTransactions);
+
+router.route('/:id').delete(deleteTransactions);
 
 module.exports = router;
