@@ -4,6 +4,7 @@ const Transaction = require('../models/Transaction');
 // @route  GET /api/v1/transactions
 // @access Public
 exports.getTransactions = async (req, res, next) => {
+  console.log('GETTING...');
   try {
     const transactions = await Transaction.find();
     return res.status(200).json({
@@ -12,7 +13,7 @@ exports.getTransactions = async (req, res, next) => {
       data: transactions
     });
   } catch (err) {
-    return res.send(500).json({
+    return res.status(500).json({
       success: false,
       error: 'Server error'
     });
@@ -23,7 +24,20 @@ exports.getTransactions = async (req, res, next) => {
 // @route  POST /api/v1/transactions
 // @access Public
 exports.addTransactions = async (req, res, next) => {
-  res.send('POST transaction');
+  console.log('ADDING...');
+  try {
+    const { text, amount } = req.body;
+    const transaction = await Transaction.create(req.body);
+    return res.status(201).json({
+      success: true,
+      data: transaction
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: 'Server error'
+    });
+  }
 };
 
 // @desc   Delete transaction.
