@@ -33,11 +33,20 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
-  function deleteTransaction(id) {
-    dispatch({
-      type: 'DELETE_TX',
-      payload: id
-    });
+  async function deleteTransaction(id) {
+    try {
+      await axios.delete(`/api/v1/transactions/${id}`);
+
+      dispatch({
+        type: 'DELETE_TX',
+        payload: id
+      });
+    } catch (err) {
+      dispatch({
+        type: 'TX_ERROR',
+        payload: err.response.data.error
+      });
+    }
   }
 
   function addTransaction(transaction) {
