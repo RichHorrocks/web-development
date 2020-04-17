@@ -27,9 +27,9 @@ function App() {
         <h1 className="text-6xl text-center mx-auto mt-32">Loading...</h1>
       ) : (
         <div className="grid grid-cols-3 gap-4">
-          {images.map(image => (
-            <ImageCard key={image.id} image={image} />
-          ))}
+          {images.length === 0
+            ? 'No images found'
+            : images.map(image => <ImageCard key={image.id} image={image} />)}
         </div>
       )}
     </div>
